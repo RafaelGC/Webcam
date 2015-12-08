@@ -51,17 +51,25 @@ public class ConexionWebcam implements Runnable{
                 writer.flush();
 
                 entrada = new DataInputStream(socket.getInputStream());
-
-                while (true) {
-                    try {
-
+                
+                int length = 0;
+                
+                String estado = entrada.readLine();
+                if (estado.contains("OK")) {
+                    while (true) {
+                        
                         String line = entrada.readLine();
+                        if (line.contains("Content-Length")) {
+                            length = Integer.parseInt(line.split("\\s+")[1]);
+                        }
+                        
                         if (line.isEmpty()) {
-                            manejador.manejarImagen(entrada);
+                            manejador.manejarImagen(entrada,length);
                             break;
                         }
+                        
                     }
-                    catch (IOException e) {break;}
+                    
                 }
 
                 writer.close();

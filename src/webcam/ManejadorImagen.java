@@ -12,5 +12,5 @@ import java.io.DataInputStream;
  * @author Rafa
  */
 public interface ManejadorImagen {
-    public void manejarImagen(DataInputStream dataInputStream);
+    public void manejarImagen(DataInputStream dataInputStream, int length);
 }

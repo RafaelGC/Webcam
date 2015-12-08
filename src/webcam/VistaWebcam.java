@@ -32,7 +32,7 @@ public class VistaWebcam extends JFrame implements ManejadorImagen{
     }
     
     @Override
-    public void manejarImagen(DataInputStream dataInputStream) {
+    public void manejarImagen(DataInputStream dataInputStream, int length) {
         try {
             //Cargar imagen.
             imagen = ImageIO.read(dataInputStream);

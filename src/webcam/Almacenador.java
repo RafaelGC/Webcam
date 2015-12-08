@@ -27,23 +27,27 @@ public class Almacenador implements ManejadorImagen{
     }
     
     @Override
-    public void manejarImagen(DataInputStream dataInputStream) {
+    public void manejarImagen(DataInputStream dataInputStream, int length) {
         try {
-            FileOutputStream output = new FileOutputStream(new File(nombreArchivo+indice+".jpg"));
+            String nombreArchivoCompleto = nombreArchivo+indice+".jpg";
+            FileOutputStream output = new FileOutputStream(new File(nombreArchivoCompleto));
             
-            while (true) {
-                try {
-                    output.write(dataInputStream.readByte());
-                }
-                catch (IOException e) {
-                    break; //Fin de la lectura.
-                }
-            }
+            System.out.println("Grabada la imagen "+nombreArchivoCompleto+" de "+length+" bytes");
+            
+            byte[] bytes = new byte[length];
+            dataInputStream.readFully(bytes, 0, length);
+            output.write(bytes);
+            
             
             indice++;
             
-        } catch (FileNotFoundException ex) {
         }
+        catch (FileNotFoundException ex) {
+        }
+        catch (IOException e) {
+            
+        }
+        
     }
     
 }
